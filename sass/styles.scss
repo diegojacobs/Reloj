@@ -83,9 +83,9 @@ $numbers-color: black;
   background-color: transparent;
   background-size: 100% 100%;
   border-radius: 100%;
-  border: solid black $border-width;
   height: $diameter;
   margin: $margin;
+  position: absolute;
   width: $diameter;
   z-index: 1;
 }
@@ -101,9 +101,10 @@ $numbers-color: black;
   left: $diameter/2;
   position: absolute;
   top: $diameter/2;
+  z-index: 3;
 }
 .hour{
-  background: black;
+  background-color: black;
   height: $diameter*0.20;
   width: $diameter*0.0001;
 }

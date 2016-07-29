@@ -19,9 +19,9 @@
   background-color: transparent;
   background-size: 100% 100%;
   border-radius: 100%;
-  border: solid black 2px;
   height: 400px;
   margin: 50px;
+  position: absolute;
   width: 400px;
   z-index: 1; }
 
@@ -76,10 +76,11 @@
 .hour, .minute, .second {
   left: 200px;
   position: absolute;
-  top: 200px; }
+  top: 200px;
+  z-index: 3; }
 
 .hour {
-  background: black;
+  background-color: black;
   height: 80px;
   width: 0.04px; }
 
