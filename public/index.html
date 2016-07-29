@@ -1,18 +1,26 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <link rel="stylesheet" href="css/styles.css">
-  <title>Example</title>
-
-</head>
-<body>
-  <h1>Ejemplo javascript</h1>
-
-  <div id="viewport"></div>
-
-  <button id="change">Change</button>
-
-  <script src="scripts/app.js"></script>
-
-</body>
+  <head>
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Reloj</title>
+  </head>
+  <body>
+  <h1>Reloj Analogo</h1>
+    <div id="analogo">
+    	<div id="reloj">  
+        <div id="agujas"></div> 		
+    		<div id="numbers"></div>	
+    	</div>
+    </div>
+    <h1>Reloj Digital</h1>
+    <div class="digital" id="digital">
+    </div>
+  	<div id="dropdown">
+  		<select>
+  			<option value="Analogo">Análogo</option>
+  			<option value="Digital">Digital</option>
+  		</select>
+  	</div>
+    <script type="text/javascript" src="scripts/app.js"></script>
+  </body>
 </html>

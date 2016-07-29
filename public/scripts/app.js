@@ -1,61 +1,97 @@
-/*
+var numbers = document.getElementById("numbers");
 
-state = 0: red
-state = 1: yellow
-state = 2: green
+function insertNumbers(){
+  var html = '<div class="number hora-1">1</div>';
+  html += '<div class="number hora-2">2</div>';
+  html += '<div class="number hora-3">3</div>';
+  html += '<div class="number hora-4">4</div>';
+  html += '<div class="number hora-5">5</div>';
+  html += '<div class="number hora-6">6</div>';
+  html += '<div class="number hora-7">7</div>';
+  html += '<div class="number hora-8">8</div>';
+  html += '<div class="number hora-9">9</div>';
+  html += '<div class="number hora-10">10</div>';
+  html += '<div class="number hora-11">11</div>';
+  html += '<div class="number hora-12">12</div>';
+  return html;
+}
 
-*/
+numbers.innerHTML = insertNumbers();
 
-// Modelo / estado
-var state = 0;
+var agujas = document.getElementById("agujas");
 
-var viewport = document.getElementById("viewport");
-var changeTrigger = document.getElementById("change");
-
-changeTrigger.addEventListener("click", function(){
-  if(state === 0){
-    state = 2;
-  }
-  else if(state === 1){
-    state = 0;
-  }
-  else{
-    state = 1;
-  }
-
-  viewport.innerHTML = render(state);
-});
-
-
-function render(state){
-  var html = "";
-
-  html += '<div class="traffic-light">';
-
-  if(state === 0){
-    html += '<div class="red light"></div>';
-  }
-  else{
-    html += '<div class="red light off"></div>';
-  }
-
-  if(state === 1){
-    html += '<div class="yellow light"></div>';
-  }
-  else{
-    html += '<div class="yellow light off"></div>';
-  }
-
-  if(state === 2){
-    html += '<div class="green light"></div>';
-  }
-  else{
-    html += '<div class="green light off"></div>';
-  }
-
-  html += '</div>';
+function insertAgujas(){
+  var html = '<div class="hour"></div>';
+  html += '<div class="minute"></div>';
+  html += '<div class="second"></div>';
 
   return html;
 }
 
-viewport.innerHTML = render(state);
+agujas.innerHTML = insertAgujas();
+
+function getHour(){
+  var date = new Date();
+  var h = date.getHours(); 
+  return h;
+}
+
+function printHour(){
+  var hour = getHour();
+  return hour + ':';
+}
+
+function getMinute(){
+  var date = new Date();
+  var m = date.getMinutes(); 
+  return m;
+}
+
+function printMinute(){
+  var minute = getMinute();
+  return minute + ':';
+}
+
+
+
+function getSecond(){
+  var date = new Date();
+  var s = date.getSeconds(); 
+  return s;
+}
+
+function printSecond(){
+  var second = getSecond();
+  return second;
+}
+
+var digital = document.getElementById("digital");
+
+function insertClock(){
+  var html = '<div class="digitalClock H" id="digitalH"></div>';
+  html += '<div class="digitalClock M" id="digitalM"></div>';
+  html += '<div class="digitalClock S" id="digitalS"></div>';
+  return html;
+}
+digital.innerHTML = insertClock();
+function refreshDigital(){
+  var hour = document.getElementById("digitalH");
+  hour.innerHTML = printHour();
+
+  var minute = document.getElementById("digitalM");
+  minute.innerHTML = printMinute();
+
+  var second = document.getElementById("digitalS");
+  second.innerHTML = printSecond(); 
+}
+
+setInterval(refreshDigital,1000);
+
+
+var dropdown = document.getElementById('dropdown');
+function changeClock(){
+  var dropdown = document.getElementById('dropdown');
+  var str = dropdown.options[dropdown.selectedIndex].text;
+  console.log(str);
+}
+dropdown.addEventListener('change',changeClock(),dropdown);

@@ -1,36 +1,126 @@
-$traffic-light-width: 200px;
-$light-size: $traffic-light-width*0.75;
-.traffic-light{
-  background: black;
-  margin-bottom: 10px;
-  padding: $traffic-light-width*0.1;
-  width: $traffic-light-width;
+$diameter: 400px;
+$border-width: 2px;
+$margin: 50px;
+$numbers-color: black;
 
-  .light{
-    background: white;
-    border-radius: 100%;
-    height: $light-size;
-    margin: 0 auto 10px auto;
-    width: $light-size;
-
-    &.green{
-      background: #0f0;
-    }
-
-    &.red{
-      background: red;
-    }
-
-    &.yellow{
-      background: yellow;
-    }
-
-    &.off{
-      opacity: 0.3;
-    }
-
-    &:last-child{
-      margin-bottom: 0;
+@function pow($number, $exp) {
+  $value: 1;
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
     }
   }
+  @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+@function fact($number) {
+  $value: 1;
+  @if $number > 0 {
+    @for $i from 1 through $number {
+      $value: $value * $i;
+    }
+  }
+  @return $value;
+}
+@function pi() {
+  @return 3.14159265359;
+}
+@function rad($angle) {
+  $unit: unit($angle);
+  $unitless: $angle / ($angle * 0 + 1);
+  // If the angle has 'deg' as unit, convert to radians.
+  @if $unit == deg {
+    $unitless: $unitless / 180 * pi();
+  }
+  @return $unitless;
+}
+@function sin($angle) {
+  $sin: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+  }
+  @return $sin;
+}
+@function cos($angle) {
+  $cos: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $cos: $cos + pow(-1, $i) * pow($angle, 2 * $i) / fact(2 * $i);
+  }
+  @return $cos;
+}
+
+@function tan($angle) {
+  @return sin($angle) / cos($angle);
+}
+
+#reloj{
+  background-color: lightblue;
+  background-size: 100% 100%;
+  width: $diameter;
+  height: $diameter;
+  border: solid black $border-width;
+  border-radius: 100%;
+}
+
+.number{
+  height: 10px;
+  line-height: 10px;
+  text-align:center;
+  position: absolute;
+  font-size: 16px;
+  font-weight: bold;
+  color: $numbers-color;
+}
+.agujas{
+  z-index: 1;
+
+  background-size: 100% 100%;
+  margin: $margin;
+  width: $diameter;
+  height: $diameter;
+  border: solid black $border-width;
+  border-radius: 100%
+}
+
+@for $i from 1 through (12){
+  .hora-#{$i}{
+    top: ($diameter/2 - $margin/4)*sin(0.1666667*pi()*($i - 3)) + $diameter/2 + 75px;
+    left: ($diameter/2 - $margin/4)*cos(0.1666667*pi()*($i - 3)) + $diameter/2 ;
+  }
+}
+
+.hour, .minute, .second{
+  position: absolute;
+  left: $diameter/2;
+  top: $diameter/2;
+}
+.hour{
+  background: black;
+  height: $diameter*0.20;
+  width: $diameter*0.0001;
+}
+.minute{
+  background-color: black;
+  height: $diameter/10;
+  width: $diameter*0.00001;
+}
+.second{
+  background-color: black;
+  height: $diameter*0.60;
+  width: $diameter*0.000001;  
+}
+
+.digitalClock{
+  display: inline;
+  width: 100px;
+  font-weight: bold;
+  font-size: 100px;
 }
